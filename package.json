@@ -1,0 +1,36 @@
+{
+  "name": "glm-4.7-api-integration",
+  "version": "1.0.0",
+  "description": "Complete backend integration for Zhipu AI's GLM-4.7 model",
+  "main": "glm-api-client.js",
+  "scripts": {
+    "test": "node test-glm-call.js",
+    "test:simple": "node -e \"const {testSimpleCompletion} = require('./test-glm-call'); testSimpleCompletion();\"",
+    "test:chat": "node -e \"const {testChatCompletion} = require('./test-glm-call'); testChatCompletion();\"",
+    "test:multi-turn": "node -e \"const {testMultiTurnConversation} = require('./test-glm-call'); testMultiTurnConversation();\"",
+    "test:functions": "node -e \"const {testFunctionCalling} = require('./test-glm-call'); testFunctionCalling();\"",
+    "test:custom": "node -e \"const {testCustomParameters} = require('./test-glm-call'); testCustomParameters();\""
+  },
+  "keywords": [
+    "glm",
+    "glm-4.7",
+    "zhipu-ai",
+    "ai",
+    "llm",
+    "api-client",
+    "chat-completion",
+    "function-calling"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "supabase": "^2.76.6"
+  }
+}

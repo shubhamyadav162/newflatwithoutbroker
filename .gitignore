@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Credentials (NEVER commit!)
+Credentiaal.md
+credential.md
+*.pem
+*.key
+
+# Prisma
+prisma/dev.db
+prisma/migrations/
+
+# Docker
+*.tar
+
+# Test
+coverage/
+
+# Misc
+*.bak
+*.tmp
+github_deploy_key
+github_deploy_key.pub
+vpsinfo.md
+id_ed25519
+vps_key.pem
+.vercel

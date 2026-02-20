@@ -1,0 +1,97 @@
+# FlatWithoutBrokerage - Official Project Documentation
+
+## 1. Executive Summary
+
+**Project Name:** FlatWithoutBrokerage (FWB)
+**Mission:** To democratize the Indian real estate market by eliminating middlemen and brokerage fees completely.
+**Vision:** A 100% free, transparent, and direct-to-owner property marketplace.
+
+**FlatWithoutBrokerage** is a modern, full-stack web application designed to disrupt the traditional rental and property market in India. It enables property owners to list their flats, villas, and shops for free, and allows tenants/buyers to contact them directly without any intermediaries. Built on a robust, scalable tech stack, it prioritizes user experience, speed, and security.
+
+---
+
+## 2. Key Value Propositions
+
+1.  **Zero Brokerage**: The core USP. 100% savings on brokerage fees for both owners and tenants.
+2.  **Direct Connection**: Verified phone numbers and One-Click WhatsApp integration streamline communication.
+3.  **Verified Listings**: "Verified Owner" badges build trust and reduce spam.
+4.  **Privacy Focused**: Contact details are revealed only to logged-in users to prevent data scraping.
+5.  **Hyper-Local**: Precision location services using Google Maps integration.
+
+---
+
+## 3. Technical Architecture
+
+The project follows a modern **Monorepo-style Microservices Architecture** contained within a Dockerized environment for easy portability and scalability.
+
+### 3.1 Technology Stack
+
+#### **Frontend (Client-Side)**
+*   **Framework**: [React.js](https://react.dev/) (v18) with [Vite](https://vitejs.dev/) for lightning-fast builds.
+*   **Language**: [TypeScript](https://www.typescriptlang.org/) for type safety and robust code.
+*   **Styling**: [TailwindCSS](https://tailwindcss.com/) for utility-first responsive design.
+*   **UI Library**: [Shadcn/UI](https://ui.shadcn.com/) (built on Radix Primitives) for accessible, premium components.
+*   **Animations**: [Framer Motion](https://www.framer.com/motion/) for fluid, native-app-like transitions.
+*   **State Management**: [TanStack Query](https://tanstack.com/query) for server state and caching.
+*   **Forms**: React Hook Form + Zod validation.
+*   **Maps**: Google Maps JavaScript API for location picking and display.
+
+#### **Backend (Server-Side)**
+*   **Runtime**: [Node.js](https://nodejs.org/) with [Express.js](https://expressjs.com/) framework.
+*   **Language**: TypeScript for consistency across the stack.
+*   **Database**: [PostgreSQL](https://www.postgresql.org/) (v15) - A robust relational database.
+*   **ORM**: [Prisma](https://www.prisma.io/) for type-safe database queries and migrations.
+*   **Storage**: [Cloudinary](https://cloudinary.com/) for optimized image hosting and transformations.
+*   **Validation**: Zod for compile-time and runtime request validation.
+
+#### **Infrastructure & DevOps**
+*   **Containerization**: [Docker](https://www.docker.com/) & Docker Compose for orchestration.
+*   **Web Server**: [Nginx](https://nginx.org/) acting as a reverse proxy and static file server.
+*   **Hosting**: VPS (Virtual Private Server) deployment for full control.
+*   **Security**: Helmet.js for headers, Rate Limiting for DDoS protection, CORS configuration.
+
+---
+
+## 4. Key Features & Modules
+
+### 4.1 Property Discovery (Search & Filter)
+*   **Smart Search**: Filter by City, Locality, BHK, Price Range, and Property Type.
+*   **Visual Gallery**: Amazon-style image galleries with zoom and carousel support.
+*   **Map View**: Interactive maps showing exact property locations.
+
+### 4.2 Posting System (Owner Flow)
+*   **Easy Listing**: 3-step process to post a property.
+*   **Location Picker**: Drag-and-drop map pin for precise address tagging.
+*   **Image Upload**: High-performance multi-file upload with auto-compression.
+
+### 4.3 User System
+*   **Role-Based Access**: Specialized dashboards for Owners and Tenants (Buyers).
+*   **My Properties**: Dashboard to manage, edit, or delete listings.
+*   **Contact History**: Tracks all owners a user has contacted for easy follow-up.
+
+### 4.4 Admin Panel
+*   **Analytics Dashboard**: Real-time view of total users, properties, and engagement.
+*   **Content Moderation**: Ability to ban users or remove spam listings.
+
+---
+
+## 5. Security Measures
+
+*   **JWT Authentication**: Secure, stateless session management with Access and Refresh tokens.
+*   **Password Hashing**: Bcrypt integration for securing user credentials.
+*   **API Security**: Rate limiting to prevent abuse and Helmet.js to secure HTTP headers.
+*   **Data Validation**: Strict Zod schemas ensure no malformed data enters the database.
+
+---
+
+## 6. Future Roadmap (Scalability)
+
+1.  **Mobile App**: Wrappers using React Native or Capacitor for iOS/Android presence.
+2.  **AI Recommendations**: Machine learning to suggest properties based on user viewing history.
+3.  **Chat System**: Built-in real-time chat (Socket.io) to replace external WhatsApp dependency.
+4.  **Virtual Tours**: Integration of 360-degree video tours.
+
+---
+
+**Generated by**: Antigravity AI  
+**Date**: January 25, 2026

@@ -1,0 +1,153 @@
+// Prisma Schema for FlatWithoutBrokerage.com
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums
+enum UserRole {
+  BUYER
+  OWNER
+  ADMIN
+}
+
+enum PropertyType {
+  APARTMENT
+  VILLA
+  PG
+  SHOP
+  OFFICE
+  PLOT
+}
+
+enum ListingType {
+  RENT
+  SELL
+}
+
+enum PropertyStatus {
+  ACTIVE
+  SOLD
+  RENTED
+  INACTIVE
+}
+
+enum Furnishing {
+  FULLY
+  SEMI
+  NONE
+}
+
+enum TenantType {
+  FAMILY
+  BACHELOR
+  COMPANY
+  ANY
+}
+
+enum Availability {
+  IMMEDIATE
+  WITHIN15
+  WITHIN30
+}
+
+// Models
+model User {
+  id          String    @id @default(uuid())
+  phone       String?   @unique
+  email       String?   @unique
+  name        String?
+  avatar      String?
+  googleId    String?   @unique
+  role        UserRole  @default(BUYER)
+  isVerified  Boolean   @default(false)
+  credits     Int       @default(9999)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  properties      Property[]
+  contactsViewed  ContactAccess[] @relation("ViewedContacts")
+  contactsGiven   ContactAccess[] @relation("GivenContacts")
+
+  @@index([phone])
+  @@index([email])
+  @@index([googleId])
+}
+
+model Property {
+  id          String          @id @default(uuid())
+  title       String
+  description String
+  type        PropertyType
+  listingType ListingType
+  status      PropertyStatus  @default(ACTIVE)
+  
+  // Pricing
+  price       Float
+  deposit     Float?
+  maintenance Float?
+  
+  // Details
+  bhk         Int             @default(0)
+  bathrooms   Int             @default(1)
+  builtUpArea Int
+  furnishing  Furnishing      @default(NONE)
+  tenantType  TenantType      @default(ANY)
+  availability Availability   @default(IMMEDIATE)
+  
+  // Location
+  locality    String
+  city        String
+  state       String          @default("Maharashtra")
+  pincode     String?
+  address     String?
+  latitude    Float?
+  longitude   Float?
+  
+  // Media
+  images      String[]
+  amenities   String[]
+  contactPhone String?
+  
+  // Stats
+  views       Int             @default(0)
+  
+  // Timestamps
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  
+  // Relations
+  ownerId     String
+  owner       User            @relation(fields: [ownerId], references: [id])
+  contacts    ContactAccess[]
+
+  @@index([city])
+  @@index([locality])
+  @@index([price])
+  @@index([type])
+  @@index([listingType])
+  @@index([status])
+}
+
+model ContactAccess {
+  id          String    @id @default(uuid())
+  timestamp   DateTime  @default(now())
+  
+  // Relations
+  viewerId    String
+  viewer      User      @relation("ViewedContacts", fields: [viewerId], references: [id])
+  
+  propertyId  String
+  property    Property  @relation(fields: [propertyId], references: [id])
+  
+  ownerId     String
+  owner       User      @relation("GivenContacts", fields: [ownerId], references: [id])
+
+  @@index([viewerId])
+  @@index([propertyId])
+}

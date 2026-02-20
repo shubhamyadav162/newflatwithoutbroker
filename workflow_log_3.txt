@@ -1,0 +1,135 @@
+deploy	Set up job	﻿2026-01-22T05:17:08.3692478Z Current runner version: '2.331.0'
+deploy	Set up job	2026-01-22T05:17:08.3784557Z ##[group]Runner Image Provisioner
+deploy	Set up job	2026-01-22T05:17:08.3787347Z Hosted Compute Agent
+deploy	Set up job	2026-01-22T05:17:08.3789240Z Version: 20251211.462
+deploy	Set up job	2026-01-22T05:17:08.3791165Z Commit: 6cbad8c2bb55d58165063d031ccabf57e2d2db61
+deploy	Set up job	2026-01-22T05:17:08.3793228Z Build Date: 2025-12-11T16:28:49Z
+deploy	Set up job	2026-01-22T05:17:08.3795321Z Worker ID: {953294a6-73b4-44b4-a682-1947fb1ff730}
+deploy	Set up job	2026-01-22T05:17:08.3808044Z ##[endgroup]
+deploy	Set up job	2026-01-22T05:17:08.3809876Z ##[group]Operating System
+deploy	Set up job	2026-01-22T05:17:08.3811818Z Ubuntu
+deploy	Set up job	2026-01-22T05:17:08.3813585Z 24.04.3
+deploy	Set up job	2026-01-22T05:17:08.3815270Z LTS
+deploy	Set up job	2026-01-22T05:17:08.3817390Z ##[endgroup]
+deploy	Set up job	2026-01-22T05:17:08.3819214Z ##[group]Runner Image
+deploy	Set up job	2026-01-22T05:17:08.3821060Z Image: ubuntu-24.04
+deploy	Set up job	2026-01-22T05:17:08.3822926Z Version: 20260111.209.1
+deploy	Set up job	2026-01-22T05:17:08.3855988Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260111.209/images/ubuntu/Ubuntu2404-Readme.md
+deploy	Set up job	2026-01-22T05:17:08.3859897Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260111.209
+deploy	Set up job	2026-01-22T05:17:08.3863213Z ##[endgroup]
+deploy	Set up job	2026-01-22T05:17:08.3867257Z ##[group]GITHUB_TOKEN Permissions
+deploy	Set up job	2026-01-22T05:17:08.3871378Z Contents: read
+deploy	Set up job	2026-01-22T05:17:08.3873213Z Metadata: read
+deploy	Set up job	2026-01-22T05:17:08.3875066Z Packages: read
+deploy	Set up job	2026-01-22T05:17:08.3897361Z ##[endgroup]
+deploy	Set up job	2026-01-22T05:17:08.3901634Z Secret source: Actions
+deploy	Set up job	2026-01-22T05:17:08.3903776Z Prepare workflow directory
+deploy	Set up job	2026-01-22T05:17:08.4757784Z Prepare all required actions
+deploy	Set up job	2026-01-22T05:17:08.4816630Z Getting action download info
+deploy	Set up job	2026-01-22T05:17:08.7572480Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+deploy	Set up job	2026-01-22T05:17:08.8768511Z Download action repository 'webfactory/ssh-agent@v0.9.0' (SHA:dc588b651fe13675774614f8e6a936a468676387)
+deploy	Set up job	2026-01-22T05:17:09.1338542Z Complete job name: deploy
+deploy	Checkout code	﻿2026-01-22T05:17:09.2076337Z ##[group]Run actions/checkout@v4
+deploy	Checkout code	2026-01-22T05:17:09.2077737Z with:
+deploy	Checkout code	2026-01-22T05:17:09.2078585Z   repository: shubhamyadav162/Flat-without-brokerage
+deploy	Checkout code	2026-01-22T05:17:09.2079782Z   token: ***
+deploy	Checkout code	2026-01-22T05:17:09.2080527Z   ssh-strict: true
+deploy	Checkout code	2026-01-22T05:17:09.2081292Z   ssh-user: git
+deploy	Checkout code	2026-01-22T05:17:09.2082049Z   persist-credentials: true
+deploy	Checkout code	2026-01-22T05:17:09.2082915Z   clean: true
+deploy	Checkout code	2026-01-22T05:17:09.2083690Z   sparse-checkout-cone-mode: true
+deploy	Checkout code	2026-01-22T05:17:09.2084547Z   fetch-depth: 1
+deploy	Checkout code	2026-01-22T05:17:09.2085297Z   fetch-tags: false
+deploy	Checkout code	2026-01-22T05:17:09.2086463Z   show-progress: true
+deploy	Checkout code	2026-01-22T05:17:09.2087254Z   lfs: false
+deploy	Checkout code	2026-01-22T05:17:09.2088014Z   submodules: false
+deploy	Checkout code	2026-01-22T05:17:09.2088800Z   set-safe-directory: true
+deploy	Checkout code	2026-01-22T05:17:09.2089957Z ##[endgroup]
+deploy	Checkout code	2026-01-22T05:17:09.3432478Z Syncing repository: shubhamyadav162/Flat-without-brokerage
+deploy	Checkout code	2026-01-22T05:17:09.3440211Z ##[group]Getting Git version info
+deploy	Checkout code	2026-01-22T05:17:09.3441918Z Working directory is '/home/runner/work/Flat-without-brokerage/Flat-without-brokerage'
+deploy	Checkout code	2026-01-22T05:17:09.3445977Z [command]/usr/bin/git version
+deploy	Checkout code	2026-01-22T05:17:09.4246248Z git version 2.52.0
+deploy	Checkout code	2026-01-22T05:17:09.4250889Z ##[endgroup]
+deploy	Checkout code	2026-01-22T05:17:09.4259029Z Temporarily overriding HOME='/home/runner/work/_temp/4ae9244d-90d3-4101-b196-4439f66c58f6' before making global git config changes
+deploy	Checkout code	2026-01-22T05:17:09.4262101Z Adding repository directory to the temporary git global config as a safe directory
+deploy	Checkout code	2026-01-22T05:17:09.4265005Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Flat-without-brokerage/Flat-without-brokerage
+deploy	Checkout code	2026-01-22T05:17:09.4269794Z Deleting the contents of '/home/runner/work/Flat-without-brokerage/Flat-without-brokerage'
+deploy	Checkout code	2026-01-22T05:17:09.4272972Z ##[group]Initializing the repository
+deploy	Checkout code	2026-01-22T05:17:09.4275046Z [command]/usr/bin/git init /home/runner/work/Flat-without-brokerage/Flat-without-brokerage
+deploy	Checkout code	2026-01-22T05:17:09.4277780Z hint: Using 'master' as the name for the initial branch. This default branch name
+deploy	Checkout code	2026-01-22T05:17:09.4280154Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+deploy	Checkout code	2026-01-22T05:17:09.4282737Z hint: to use in all of your new repositories, which will suppress this warning,
+deploy	Checkout code	2026-01-22T05:17:09.4284708Z hint: call:
+deploy	Checkout code	2026-01-22T05:17:09.4286317Z hint:
+deploy	Checkout code	2026-01-22T05:17:09.4287688Z hint: 	git config --global init.defaultBranch <name>
+deploy	Checkout code	2026-01-22T05:17:09.4289184Z hint:
+deploy	Checkout code	2026-01-22T05:17:09.4290793Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+deploy	Checkout code	2026-01-22T05:17:09.4293010Z hint: 'development'. The just-created branch can be renamed via this command:
+deploy	Checkout code	2026-01-22T05:17:09.4294997Z hint:
+deploy	Checkout code	2026-01-22T05:17:09.4296418Z hint: 	git branch -m <name>
+deploy	Checkout code	2026-01-22T05:17:09.4297792Z hint:
+deploy	Checkout code	2026-01-22T05:17:09.4298976Z hint: Disable this message with "git config set advice.defaultBranchName false"
+deploy	Checkout code	2026-01-22T05:17:09.4300956Z Initialized empty Git repository in /home/runner/work/Flat-without-brokerage/Flat-without-brokerage/.git/
+deploy	Checkout code	2026-01-22T05:17:09.4304468Z [command]/usr/bin/git remote add origin https://github.com/shubhamyadav162/Flat-without-brokerage
+deploy	Checkout code	2026-01-22T05:17:09.4309099Z ##[endgroup]
+deploy	Checkout code	2026-01-22T05:17:09.4311339Z ##[group]Disabling automatic garbage collection
+deploy	Checkout code	2026-01-22T05:17:09.4313074Z [command]/usr/bin/git config --local gc.auto 0
+deploy	Checkout code	2026-01-22T05:17:09.4317407Z ##[endgroup]
+deploy	Checkout code	2026-01-22T05:17:09.4319375Z ##[group]Setting up auth
+deploy	Checkout code	2026-01-22T05:17:09.4321399Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+deploy	Checkout code	2026-01-22T05:17:09.4327029Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+deploy	Checkout code	2026-01-22T05:17:09.4476501Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+deploy	Checkout code	2026-01-22T05:17:09.4514416Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+deploy	Checkout code	2026-01-22T05:17:09.4815023Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+deploy	Checkout code	2026-01-22T05:17:09.4861692Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+deploy	Checkout code	2026-01-22T05:17:09.5106107Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+deploy	Checkout code	2026-01-22T05:17:09.5145268Z ##[endgroup]
+deploy	Checkout code	2026-01-22T05:17:09.5148428Z ##[group]Fetching the repository
+deploy	Checkout code	2026-01-22T05:17:09.5156497Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +9ce1b1ed3bfb531bd0f066bafb2f3c5f9e6ce4a0:refs/remotes/origin/main
+deploy	Checkout code	2026-01-22T05:17:09.6855437Z From https://github.com/shubhamyadav162/Flat-without-brokerage
+deploy	Checkout code	2026-01-22T05:17:09.6858117Z  * [new ref]         9ce1b1ed3bfb531bd0f066bafb2f3c5f9e6ce4a0 -> origin/main
+deploy	Checkout code	2026-01-22T05:17:09.6891364Z ##[endgroup]
+deploy	Checkout code	2026-01-22T05:17:09.6893582Z ##[group]Determining the checkout info
+deploy	Checkout code	2026-01-22T05:17:09.6896582Z ##[endgroup]
+deploy	Checkout code	2026-01-22T05:17:09.6898378Z [command]/usr/bin/git sparse-checkout disable
+deploy	Checkout code	2026-01-22T05:17:09.6941302Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+deploy	Checkout code	2026-01-22T05:17:09.6972222Z ##[group]Checking out the ref
+deploy	Checkout code	2026-01-22T05:17:09.6976149Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+deploy	Checkout code	2026-01-22T05:17:09.7116242Z Switched to a new branch 'main'
+deploy	Checkout code	2026-01-22T05:17:09.7121793Z branch 'main' set up to track 'origin/main'.
+deploy	Checkout code	2026-01-22T05:17:09.7130140Z ##[endgroup]
+deploy	Checkout code	2026-01-22T05:17:09.7170308Z [command]/usr/bin/git log -1 --format=%H
+deploy	Checkout code	2026-01-22T05:17:09.7196170Z 9ce1b1ed3bfb531bd0f066bafb2f3c5f9e6ce4a0
+deploy	Set up SSH	﻿2026-01-22T05:17:09.7450388Z ##[group]Run webfactory/ssh-agent@v0.9.0
+deploy	Set up SSH	2026-01-22T05:17:09.7451427Z with:
+deploy	Set up SSH	2026-01-22T05:17:09.7476519Z   ssh-private-key: ***
+deploy	Set up SSH	2026-01-22T05:17:09.7477366Z   log-public-key: true
+deploy	Set up SSH	2026-01-22T05:17:09.7478162Z ##[endgroup]
+deploy	Set up SSH	2026-01-22T05:17:09.7911892Z Starting ssh-agent
+deploy	Set up SSH	2026-01-22T05:17:09.8132064Z SSH_AUTH_SOCK=/tmp/ssh-jRYJdw5kBkt5/agent.1964
+deploy	Set up SSH	2026-01-22T05:17:09.8136031Z SSH_AGENT_PID=1965
+deploy	Set up SSH	2026-01-22T05:17:09.8137499Z Adding private key(s) to agent
+deploy	Set up SSH	2026-01-22T05:17:09.8370260Z Error loading key "(stdin)": error in libcrypto
+deploy	Set up SSH	2026-01-22T05:17:09.8403052Z ##[error]Command failed: ssh-add -
+deploy	Set up SSH	Error loading key "(stdin)": error in libcrypto
+deploy	Set up SSH	
+deploy	Post Set up SSH	﻿2026-01-22T05:17:09.8573678Z Post job cleanup.
+deploy	Post Set up SSH	2026-01-22T05:17:09.8940059Z Stopping SSH agent
+deploy	Post Set up SSH	2026-01-22T05:17:09.8952048Z The "file" argument must be of type string. Received undefined
+deploy	Post Set up SSH	2026-01-22T05:17:09.8955829Z Error stopping the SSH agent, proceeding anyway
+deploy	Post Checkout code	﻿2026-01-22T05:17:09.9160109Z Post job cleanup.
+deploy	Post Checkout code	2026-01-22T05:17:10.0167231Z [command]/usr/bin/git version
+deploy	Post Checkout code	2026-01-22T05:17:10.0210963Z git version 2.52.0
+deploy	Post Checkout code	2026-01-22T05:17:10.0262019Z Temporarily overriding HOME='/home/runner/work/_temp/fb915b0a-454e-4ad1-b418-6083a9959a4e' before making global git config changes
+deploy	Post Checkout code	2026-01-22T05:17:10.0266237Z Adding repository directory to the temporary git global config as a safe directory
+deploy	Post Checkout code	2026-01-22T05:17:10.0270321Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Flat-without-brokerage/Flat-without-brokerage
+deploy	Post Checkout code	2026-01-22T05:17:10.0322115Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+deploy	Post Checkout code	2026-01-22T05:17:10.0360384Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+deploy	Post Checkout code	2026-01-22T05:17:10.0608182Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+deploy	Post Checkout code	2026-01-22T05:17:10.0632233Z http.https://github.com/.extraheader
+deploy	Post Checkout code	2026-01-22T05:17:10.0648967Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+deploy	Post Checkout code	2026-01-22T05:17:10.0688295Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+deploy	Post Checkout code	2026-01-22T05:17:10.0923099Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+deploy	Post Checkout code	2026-01-22T05:17:10.0961005Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+deploy	Complete job	﻿2026-01-22T05:17:10.1318860Z Cleaning up orphan processes
