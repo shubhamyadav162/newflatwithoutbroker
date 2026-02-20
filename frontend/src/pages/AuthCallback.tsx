@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
+import { useAuth } from "@/contexts/AuthContext";
 
 const AuthCallback = () => {
     const navigate = useNavigate();
@@ -8,78 +9,30 @@ const AuthCallback = () => {
     const [error, setError] = useState<string | null>(null);
     const [status, setStatus] = useState("Authenticating...");
 
+    const { isAuthenticated, isLoading, user } = useAuth();
+
     useEffect(() => {
-        const handleAuthCallback = async () => {
-            try {
-                // Check for error in URL params
-                const errorParam = searchParams.get('error');
-                const errorDesc = searchParams.get('error_description');
+        const errorParam = searchParams.get('error');
+        const errorDesc = searchParams.get('error_description');
 
-                if (errorParam) {
-                    setError(errorDesc || errorParam);
-                    setTimeout(() => navigate("/login?error=" + encodeURIComponent(errorDesc || errorParam)), 2000);
-                    return;
-                }
+        if (errorParam) {
+            setError(errorDesc || errorParam);
+            setTimeout(() => navigate("/login?error=" + encodeURIComponent(errorDesc || errorParam)), 2000);
+            return;
+        }
 
-                // Get the code from URL (PKCE flow)
-                const code = searchParams.get('code');
-
-                if (code) {
-                    setStatus("Verifying authentication...");
-
-                    // Exchange code for session
-                    const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
-
-                    if (exchangeError) {
-                        console.error("Code exchange error:", exchangeError);
-                        setError(exchangeError.message);
-                        setTimeout(() => navigate("/login?error=" + encodeURIComponent(exchangeError.message)), 2000);
-                        return;
-                    }
-
-                    if (data.session) {
-                        setStatus("Welcome back! Redirecting...");
-                        console.log("Session established:", data.session.user.email);
-
-                        // Small delay to show success message
-                        setTimeout(() => {
-                            navigate("/", { replace: true });
-                        }, 500);
-                        return;
-                    }
-                }
-
-                // Fallback: Check if session already exists (hash fragment flow)
-                setStatus("Checking session...");
-                const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-
-                if (sessionError) {
-                    console.error("Session error:", sessionError);
-                    setError(sessionError.message);
-                    setTimeout(() => navigate("/login?error=" + encodeURIComponent(sessionError.message)), 2000);
-                    return;
-                }
-
-                if (session) {
-                    setStatus("Welcome back! Redirecting...");
-                    console.log("Session found:", session.user.email);
-                    setTimeout(() => navigate("/", { replace: true }), 500);
-                    return;
-                }
-
-                // No session found
+        if (!isLoading) {
+            if (isAuthenticated && user) {
+                setStatus("Welcome back! Redirecting...");
+                setTimeout(() => navigate("/", { replace: true }), 500);
+            } else {
                 setError("Authentication failed. Please try again.");
                 setTimeout(() => navigate("/login?error=no_session"), 2000);
-
-            } catch (err) {
-                console.error("Auth callback error:", err);
-                setError("An unexpected error occurred");
-                setTimeout(() => navigate("/login?error=unexpected"), 2000);
             }
-        };
-
-        handleAuthCallback();
-    }, [navigate, searchParams]);
+        } else {
+            setStatus("Verifying authentication...");
+        }
+    }, [isAuthenticated, isLoading, user, navigate, searchParams]);
 
     return (
         <div className="min-h-screen bg-neutral-50 flex items-center justify-center">

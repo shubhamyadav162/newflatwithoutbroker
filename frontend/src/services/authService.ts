@@ -89,40 +89,61 @@ export const authService = {
         userId: string,
         userData: { phone?: string | null; email?: string | null; name?: string | null; google_id?: string | null; avatar?: string | null }
     ): Promise<User> {
-        // First try to get existing profile
-        const { data: existingProfile } = await supabase
-            .from('users')
-            .select('*')
-            .eq('id', userId)
-            .single();
+        console.log('getOrCreateProfile: fetching from DB for', userId);
 
-        if (existingProfile) {
-            const dbUser = existingProfile as DbUser;
+        try {
+            // First try to get existing profile
+            const { data: existingProfile, error: fetchError } = await supabase
+                .from('users')
+                .select('*')
+                .eq('id', userId)
+                .single();
+
+            if (fetchError && fetchError.code !== 'PGRST116') {
+                console.error('getOrCreateProfile fetch error:', fetchError);
+            }
+
+            if (existingProfile) {
+                console.log('getOrCreateProfile: found existing profile');
+                const dbUser = existingProfile as DbUser;
+                return dbUserToUser(dbUser);
+            }
+
+            console.log('getOrCreateProfile: profile not found, creating new one');
+
+            // Create new profile if doesn't exist
+            const { data: newProfile, error: createError } = await supabase
+                .from('users')
+                .insert({
+                    id: userId,
+                    phone: userData.phone || null,
+                    email: userData.email || null,
+                    name: userData.name || null,
+                    google_id: userData.google_id || null,
+                    avatar: userData.avatar || null,
+                    role: 'BUYER',
+                    is_verified: true,
+                    credits: 9999,
+                })
+                .select()
+                .single();
+
+            if (createError) {
+                console.error('getOrCreateProfile create error:', createError);
+                throw createError;
+            }
+            if (!newProfile) {
+                console.error('getOrCreateProfile: no profile returned after insert');
+                throw new Error('Failed to create profile');
+            }
+
+            console.log('getOrCreateProfile: successfully created new profile');
+            const dbUser = newProfile as DbUser;
             return dbUserToUser(dbUser);
+        } catch (error) {
+            console.error('getOrCreateProfile: caught exception:', error);
+            throw error;
         }
-
-        // Create new profile if doesn't exist
-        const { data: newProfile, error: createError } = await supabase
-            .from('users')
-            .insert({
-                id: userId,
-                phone: userData.phone || null,
-                email: userData.email || null,
-                name: userData.name || null,
-                google_id: userData.google_id || null,
-                avatar: userData.avatar || null,
-                role: 'BUYER',
-                is_verified: true,
-                credits: 9999,
-            })
-            .select()
-            .single();
-
-        if (createError) throw createError;
-        if (!newProfile) throw new Error('Failed to create profile');
-
-        const dbUser = newProfile as DbUser;
-        return dbUserToUser(dbUser);
     },
 
     // Get current user
