@@ -15,9 +15,11 @@ export const adminOnly = async (
     try {
         // Check for admin password authentication (alternative to JWT)
         const adminPassword = req.headers['x-admin-password'] as string;
-        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'gKKLgKw4VWaEJuNQtstT';
+        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
-        if (adminPassword === ADMIN_PASSWORD) {
+        // Use a secure timing-safe equality check if possible, or basic check when ENV is explicitly set
+        // DO NOT fallback to a hardcoded string as this leaves a backdoor!
+        if (ADMIN_PASSWORD && adminPassword === ADMIN_PASSWORD) {
             // Admin password authentication successful
             req.admin = { email: 'admin@flatwithoutbrokerage.com', role: 'ADMIN' };
             return next();

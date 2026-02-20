@@ -415,6 +415,7 @@ export const getAnalyticsData = async (days: number = 30) => {
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - days);
 
+    const { Prisma } = await import('@prisma/client');
     // User growth over time
     const userGrowth = await prisma.$queryRaw<Array<{ date: Date; count: bigint }>>`
         SELECT
