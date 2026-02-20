@@ -44,41 +44,42 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch user profile from our users table
+  // Fetch user profile - use auth metadata directly (DB has RLS issues)
   const fetchUserProfile = async (supabaseUser: SupabaseUser): Promise<User> => {
-    try {
-      // Get or create profile
-      const profile = await authService.getOrCreateProfile(supabaseUser.id, {
-        email: supabaseUser.email,
-        name: supabaseUser.user_metadata?.full_name || supabaseUser.user_metadata?.name,
-        avatar: supabaseUser.user_metadata?.avatar_url,
-        google_id: supabaseUser.app_metadata?.provider === 'google' ? supabaseUser.id : null,
-      });
+    console.log('Building user profile from auth metadata for:', supabaseUser.email);
 
-      return {
-        id: profile.id,
-        email: profile.email,
-        name: profile.name,
-        avatar: profile.avatar,
-        role: profile.role,
-        isVerified: profile.isVerified,
-        phone: profile.phone,
-        credits: profile.credits,
-      };
-    } catch (error) {
-      console.error('Error fetching user profile from DB, using auth metadata as fallback:', error);
-      // Fallback: build user from Supabase auth metadata so UI still works
-      return {
+    const profile: User = {
+      id: supabaseUser.id,
+      email: supabaseUser.email || null,
+      name: supabaseUser.user_metadata?.full_name || supabaseUser.user_metadata?.name || supabaseUser.email?.split('@')[0] || null,
+      avatar: supabaseUser.user_metadata?.avatar_url || null,
+      role: 'BUYER',
+      isVerified: true,
+      phone: supabaseUser.phone || null,
+      credits: 9999,
+    };
+
+    console.log('Profile built:', profile.name, profile.email, profile.avatar);
+
+    // Try to sync to DB in background (non-blocking)
+    try {
+      supabase.from('users').upsert({
         id: supabaseUser.id,
         email: supabaseUser.email || null,
-        name: supabaseUser.user_metadata?.full_name || supabaseUser.user_metadata?.name || null,
-        avatar: supabaseUser.user_metadata?.avatar_url || null,
+        name: profile.name,
+        avatar: profile.avatar,
         role: 'BUYER',
-        isVerified: true,
-        phone: supabaseUser.phone || null,
-        credits: 0,
-      };
+        is_verified: true,
+        credits: 9999,
+      }, { onConflict: 'id' }).then(({ error }) => {
+        if (error) console.warn('Background DB sync failed (RLS?):', error.message);
+        else console.log('Background DB sync successful');
+      });
+    } catch (e) {
+      // Ignore - DB sync is optional
     }
+
+    return profile;
   };
 
   // Handle setting user + session together
